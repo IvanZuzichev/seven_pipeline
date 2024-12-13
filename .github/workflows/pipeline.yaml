@@ -20,11 +20,11 @@ jobs:
         with:
           node-version: 16
 
-        - name: Install dependencies
+      - name: Install dependencies # Исправленный отступ
         run: |
-          npm install -g eslint 
-          npm install 
+          npm install -g eslint
+          npm install
 
       - name: Run ESLint
         run: |
-          npx eslint . --ext .js,.jsx 
+          npx eslint . --ext .js,.jsx
