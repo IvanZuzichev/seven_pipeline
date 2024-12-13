@@ -1,0 +1,29 @@
+name: Code Style Check
+
+on: 
+  push:
+    branches:
+      - new
+
+  pull_request:
+    branches:
+      - new
+jobs:
+  checkstyle_project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone repo
+        uses: actions/checkout@v2
+
+      - name: Set version Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          pip install flake8
+
+      - name: Run linter
+        run: |
+          flake8 .
