@@ -20,10 +20,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install dependencies
+        - name: Install dependencies
         run: |
-          pip install flake8
+          npm install -g eslint 
+          npm install 
 
-      - name: Run linter
+      - name: Run ESLint
         run: |
-          flake8 .
+          npx eslint . --ext .js,.jsx 
