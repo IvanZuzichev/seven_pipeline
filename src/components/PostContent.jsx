@@ -1,50 +1,54 @@
-import './Post.css'; 
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react'; // Импортируем React и useState
 import { useNavigate } from 'react-router-dom'; 
+import './Post.css'; 
 
 export function PostContent() {
   const navigate = useNavigate();
-  const [Usermail, setEmail] = useState('');
-  const [EmailError, setEmailError] = useState(false);
-    const handleEmailChange = (e) => {
-        const email = e.target.value;
-        setEmail(email);
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        setEmailError(!emailRegex.test(email));
-    }
-  const handleChange = async () => {
-      try {
-          const response = await fetch('http://localhost:8080/auth/sendPin', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ Usermail }),
-          });
 
-          if (response.ok) {
-              navigate('/Change');
-          } else {
-              alert(`неверная почта.`);
-          }
-      } catch (error) {
-          console.error('Ошибка сети:', error);
-      }
+  // Объявляем состояния для email и ошибок
+  const [userMail, setUser] = useState(''); // Исправлено имя функции
+  const [emailError, setEmailError] = useState(false); // Для хранения ошибки почты
+
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailError(!emailRegex.test(email));
+    setUser (email); // Обновляем состояние userMail
   };
 
-  useEffect(() => {
-    document.title = 'Страница отправки кода на почту';
-  }, []);
+  const handleChange = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/auth/sendPin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userMail }), // Используем userMail
+      });
+
+      if (response.ok) {
+        navigate('/Change');
+      } else {
+        alert(`Неверная почта.`);
+      }
+    } catch (error) {
+      console.error('Ошибка сети:', error);
+    }
+  };
 
   return (
     <div className="post-container">
       <h1 className="post-title">Введите почту для отправки кода</h1>
       <div className="post-form">
-        <input type="text" placeholder="Почта" className={`post-input ${EmailError ? 'border-red-500 border-[2px]' : ''}`}
-               value={Usermail}
-               onChange={handleEmailChange} />
+        <input
+          type="text"
+          placeholder="Почта"
+          className={`post-input ${emailError ? 'border-red-500 border-[2px]' : ''}`}
+          value={userMail} // Привязываем значение к состоянию
+          onChange={handleEmailChange} // Обработчик изменения
+        />
         <button onClick={handleChange} className="post-button">Отправить код</button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,62 +1,6 @@
 import './Check.css'
-import React, {useEffect, useState} from 'react';
+
 export function CheckContent() {
-  useEffect(() => {
-    document.title = 'Страница проверки накладок';
-  }, []);
-  const [Email, setEmail] = useState('');
-  const [EmailError, setEmailError] = useState(false);
-  const [Password, setPassword] = useState('');
-  const [PasswordError, setPasswordError] = useState(false);
-
-  const [schedules, setSchedules] = useState([]);
-  const [teachers, setTeachers] = useState(null);
-  const [colors, setColors] = useState([]);
-  const [places, setPlaces] = useState([]);
-  const [color, setColor] = useState('#1A1A1A');
-  const [place, setPlace] = useState('');
-
-
-  const handleColorChange = (e) => {
-    setColor(e.target.value);
-  }
-  const handlePlaceChange = (e) => {
-    setPlace(e.target.value);
-  }
-
-  const addPlaceColor = () => {
-    if (place !== '') {
-      alert(`добавлено ${place} ${color}`)
-      places.push(place);
-      setPlaces(places);
-      setPlace('');
-      colors.push(color);
-      setColors(colors);
-      setColor('#1A1A1A')
-    }
-    else {
-      alert('выберите место')
-    }
-  }
-  const handleSchedulesFiles = (event) => {
-    setSchedules(Array.from(event.target.files));
-  };
-
-  const handleTeacherFile = (event) => {
-    setTeachers(event.target.files[0]);
-  };
-
-  const handleEmailChange = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmailError(!emailRegex.test(email));
-  }
-  const handleChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-    setPasswordError(password.length<6)
-  }
 
   const handleWorkSphere = async () => {
     try {
