@@ -1,7 +1,7 @@
 import React, { useState } from 'react'; // Импортируем React и useState
 import { useNavigate } from 'react-router-dom'; 
 import './Post.css'; 
-
+import React, { useState, useEffect } from 'react';
 export function PostContent() {
   const navigate = useNavigate();
 

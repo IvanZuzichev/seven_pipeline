@@ -1,6 +1,6 @@
 import './Auth.css';
 import { useNavigate } from 'react-router-dom'; 
-
+import React, { useState, useEffect } from 'react';
 import AppStore from '../store/StatusUser';
 
 export function AuthContent() {

@@ -1,5 +1,5 @@
 import './Check.css'
-
+import React, { useState, useEffect } from 'react';
 export function CheckContent() {
 
   const handleWorkSphere = async () => {
