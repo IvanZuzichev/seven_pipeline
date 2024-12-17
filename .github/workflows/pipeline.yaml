@@ -27,4 +27,4 @@ jobs:
 
       - name: Run ESLint
         run: |
-          npx eslint . --ext .js,.jsx
+          npx eslint .
